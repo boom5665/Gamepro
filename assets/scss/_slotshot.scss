@@ -1,0 +1,451 @@
+$icon_width: 79px;
+$icon_height: 79px;
+$num_icons: 12;
+
+
+
+.debug {
+    position: fixed;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px;
+    background: white;
+    border: 1px solid rgba(black, 0.3);
+    font-family: monospace;
+    font-size: 1.6rem;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, grey 0%, lightgray 100%);
+    background-image: url(/_nuxt/assets/image/BG.png);
+    background-position: 0 0;
+    background-repeat: round;
+    margin: 0;
+}
+
+.body-center {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.08);
+    background-image: url("~/assets/image/Vector_b.png");
+    background-position: 0 0;
+    background-repeat: round;
+}
+
+.slots {
+    position: relative;
+    width: 5.3 * 79px;
+    height: 3 * 79px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.3 * 19px;
+    background-image: url("~/assets/image/Rectangle 2270.png");
+    background-position: 0 0;
+    background-repeat: round;
+    border-radius: 3px;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 10px;
+        height: 2px;
+        background-color: rgba(black, 0.5);
+    }
+
+    &::before {
+        left: 0;
+        transform: translate(-200%, -50%);
+    }
+
+    &::after {
+        right: 0;
+        transform: translate(200%, -50%);
+    }
+
+    @keyframes win1 {
+        0% {
+            background: linear-gradient(45deg, orange 0%, yellow 100%);
+            box-shadow: 0 0 80px orange
+        }
+
+        100% {
+            background: linear-gradient(45deg, grey 0%, lightgrey 100%);
+            box-shadow: -2px 2px 3px rgba(black, 0.3);
+        }
+    }
+
+    @keyframes win2 {
+        0% {
+            background: linear-gradient(45deg, lightblue 0%, lightgreen 100%);
+            box-shadow: 0 0 80px lightgreen
+        }
+
+        100% {
+            background: linear-gradient(45deg, grey 0%, lightgrey 100%);
+            box-shadow: -2px 2px 3px rgba(black, 0.3);
+        }
+    }
+
+    &.win1 {
+        animation: win1 200ms steps(2, end) infinite;
+    }
+
+    &.win2 {
+        animation: win2 200ms steps(2, end) infinite;
+    }
+
+    .reel {
+        position: relative;
+        width: 85px;
+        height: 3 * 79px;
+        // border: 1px solid rgba(black, 0.3);
+        border-radius: 3px;
+        overflow: hidden;
+        // background-image: url(https://assets.codepen.io/439000/slotreel12.webp);
+        background-image: url("~/assets/image/reel.png");
+        background-position: 0 0;
+        background-repeat: repeat-y;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(black, 0.4) 0%, transparent 30%, transparent 70%, rgba(black, 0.4) 100%);
+            // background-image: linear-gradient(rgb(0, 0, 0) 31%, transparent 24%, transparent 68%, rgb(0, 0, 0) 51%);
+            box-shadow: inset 0 0 6px 2px rgba(black, 0.3);
+        }
+
+    }
+
+    p {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 100%;
+        transform: translate(-50%, calc(100% + 30px));
+        text-align: center;
+        font-size: 0.80rem;
+        color: #444;
+
+        a {
+            color: red;
+            font-weight: 700;
+        }
+    }
+}
+
+.controls {
+    margin-top: 65px;
+    z-index: 2;
+}
+
+.credits-bet {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    flex-direction: row;
+    border-radius: 5px;
+}
+
+
+.credits {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.bet-inputs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* ระยะห่างระหว่างช่องใส่ bet และปุ่ม */
+}
+
+.d-skull {
+    position: absolute;
+    bottom: 27.3%;
+    z-index: 1
+}
+
+.d-spin {
+    display: flex;
+    align-items: center;
+    margin-bottom: 70px;
+    width: 100%;
+    justify-content: space-evenly;
+    z-index: 2;
+    transform: translate(0px, 0px);
+}
+
+.spin-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.spin-button:hover {
+    background-color: #0056b3;
+}
+
+.history-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.history-button:hover {
+    background-color: #218838;
+}
+
+.win-lose-top {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    /* จัดให้อยู่ด้านขวา */
+    align-items: center;
+    gap: 5px;
+    /* ระยะห่างระหว่างข้อความและช่องใส่ */
+}
+
+.win-lose {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    /* จัดให้อยู่ด้านขวา */
+    align-items: center;
+    gap: 5px;
+    /* ระยะห่างระหว่างข้อความและช่องใส่ */
+}
+
+.win-lose-icon {
+    // position: absolute;
+    // transform: translate(-60px, 0px);
+}
+
+.win-lose-icon-two {
+    // position: absolute;
+    // transform: translate(-115px, 0px);
+}
+
+.win-lose input {
+    padding: 5px;
+    font-size: 16px;
+    width: 80px;
+    border: transparent;
+    border-radius: 4px;
+    background: transparent;
+    text-align: right;
+    color: white;
+}
+
+.win-lose-top input {
+    padding: 5px;
+    font-size: 16px;
+    width: 80px;
+    border: transparent;
+    border-radius: 4px;
+    background: transparent;
+    text-align: right;
+    color: white;
+}
+
+.win-line {
+    position: absolute;
+    width: 418.7px;
+    height: 4px;
+    background-color: yellow;
+    // transform: translate(0%, 137px);
+    opacity: 0;
+    top: 44%;
+    transition: opacity 0.3s ease-in-out;
+    animation: glow 1s infinite;
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(255, 255, 0, 1);
+    }
+}
+
+.show-win-line {
+    opacity: 1;
+    /* แสดงเส้นเมื่อมี class นี้ */
+}
+
+.cre-bg {
+    padding: 3px 5px;
+    background-color: rgba(50, 144, 159, 0.7);
+    color: white;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.img-tonal {
+    transform: translate(0px, 0px);
+    width: 434px;
+}
+
+.img-eye {
+    position: absolute;
+    // left: 45%;
+    width: 217px;
+}
+
+.img-logo {
+    position: absolute;
+    width: 170px;
+    transform: translate(0px, -25px);
+}
+
+.auto-spin-button {
+    padding: 5px 7px;
+    background-color: rgba(50, 144, 159, 0.7);
+    color: white;
+    border-radius: 5px;
+    margin: 5px;
+    border: none;
+    font-size: 17px;
+}
+
+.spin-icon {
+    cursor: pointer;
+    animation: spin 5s linear infinite;
+    border: none;
+    background: none;
+}
+
+.spin-icon:hover {
+    animation-duration: 1s;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.controls-re {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 32.5px;
+}
+
+.spin-b {
+    position: absolute;
+    transform: translate(1px, 17px);
+}
+
+.golden-flash {
+    color: black !important;
+    animation: golden-flash 1s infinite alternate;
+}
+
+.golden-flash {
+    animation: golden-flash 1s infinite alternate;
+}
+
+@keyframes golden-flash {
+    from {
+        background-color: #ffd700;
+        /* สีทอง */
+        box-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
+    }
+
+    to {
+        background-color: #fff5b0;
+        /* สีทองอ่อน */
+        box-shadow: 0 0 20px #fff5b0, 0 0 30px #ffd700;
+    }
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #202026;
+    padding: 20px;
+    width: 700px;
+    height: 700px;
+    max-width: 90%;
+    border-radius: 8px;
+    position: relative;
+    color: white;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background: transparent;
+    border: transparent;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.tabs button {
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    background: transparent;
+}
+
+.tabs button.active {
+    color: white;
+    background: transparent;
+}
+
+.tab-content {
+    margin-top: 20px;
+}
