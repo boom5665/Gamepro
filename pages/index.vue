@@ -100,11 +100,7 @@
     <div v-if="showModal" class="modal-overlay">
       <div class="modal-content">
         <button @click="toggleModal" class="close-button">
-          <img
-            style=""
-            src="~/assets/image/Group 4076.png"
-            alt=""
-          />
+          <img style="" src="~/assets/image/Group 4076.png" alt="" />
         </button>
 
         <!-- ส่วนของแท็บ -->
@@ -187,7 +183,7 @@ export default {
       indexes: [0, 0, 0, 0, 0], // เพิ่มจำนวนเป็น 5
       credits: 1000, // เครดิตเริ่มต้น
       bet: 10, // จำนวนเบทเริ่มต้น
-      winPercentage: 100, // เปอร์เซ็นต์โอกาสชนะ (เช่น 30%)
+      winPercentage: 0, // เปอร์เซ็นต์โอกาสชนะ (เช่น 30%)
       winMessage: "", // ข้อความรางวัล
       isWin: false,
       debugEl: null,
@@ -275,16 +271,21 @@ export default {
       this.debugEl.textContent = "rolling...";
       const reelsList = document.querySelectorAll(".slots > .reel");
 
-      // รีเซ็ตตำแหน่งเริ่มต้นของการหมุน
-      this.ranTargetPosition = [
-        Math.floor(Math.random() * this.ranStartPositions.length),
-      ];
-      console.log(this.ranTargetPosition);
-
       // คำนวณผลการชนะก่อนที่จะหมุน
       await this.calculateOutcome();
 
-      // ทำการหมุน
+      // ตั้งค่าตำแหน่งเริ่มต้นแบบสุ่มเฉพาะเมื่อชนะ
+      if (this.isWin) {
+        this.ranTargetPosition = [
+          Math.floor(Math.random() * this.ranStartPositions.length),
+        ];
+        console.log("ชนะรีเฟรช ", this.ranTargetPosition);
+      } else {
+        this.ranTargetPosition = []; // รีเซ็ตค่าเมื่อแพ้
+        console.log("แพ้ไม่รีเฟรช");
+      }
+
+      // ทำการหมุนโดยใช้ตำแหน่งที่ตั้งไว้
       await Promise.all([...reelsList].map((reel, i) => this.roll(reel, i)));
 
       console.log("AFTER INDEXES: ", this.indexes);
@@ -302,6 +303,8 @@ export default {
         inputElement.classList.remove("golden-flash"); // ลบคลาส golden-flash เมื่อแพ้
       }
 
+      // รีเซ็ต isWin หลังจากแสดงผลเสร็จสิ้น
+      this.isWin = false;
       this.rolling = false;
     },
     async calculateOutcome() {
